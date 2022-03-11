@@ -1,0 +1,76 @@
+---
+ - name: Play for Install Nginx on Webservers
+   hosts: web
+   gather_facts: no
+   serial: 1 #excutes playbook one host at a time.
+   tasks:
+     - name: run apt update
+       shell: apt update
+       tags:
+         - update
+
+     - name: clone git repo
+       shell: cd /tmp && git clone https://hithub.com/devops36/dockertest1.git
+       tags:
+         - clone
+
+     - name: Install Nginx server
+       apt: >
+         name=nginx
+         state=present
+       tags:
+         - install
+
+     - name: copy all files to index destination folder.
+       copy: >
+         src=/tmp/dockertest1/index.html
+         dest=/var/www/html/index.nginx-debian.html
+         remote_src=yes
+         owner=root
+         group=root
+         mode=0644
+       ignore_errors: yes #will proceed even task is failed.
+       tags:
+         - index
+       notify:
+         - restart nginx
+
+     - name: copy the style files to destination folder.
+       copy: > 
+         src=/tmp/dockertest1/style.css
+         dest=/var/www/html/style.css
+         remote_src=yes
+         owner=root
+         group=root
+         mode=0644
+       tags:
+         - style
+       notify:
+         - restart nginx
+
+     - name: copy the javascript files to destination folder.
+       copy: >
+         src=/tmp/dockertest1/scorekeeper.js
+         dest=/var/www/html/scorekeeper.js
+         remote_src=yes
+         owner=root
+         group=root
+         mode=0644
+       tags:
+        - js
+       notify:
+         - restart 
+
+     - name: Delete Git Repo
+       shell: rm -rf /tmp/dockertest1
+
+   handlers:
+     - name: restart nginx
+       command: service nginx restart
+
+         
+
+
+         
+
+       
