@@ -1,7 +1,7 @@
 ---
  - name: Play for Install Nginx on Webservers
    hosts: web
-   gather_facts: no
+   gather_facts: yes
    serial: 1 #excutes playbook one host at a time.
    tasks:
      - name: run apt update
