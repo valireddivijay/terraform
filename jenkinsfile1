@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("build") {
+            steps {
+                echo "some code compilation here..."
+            }
+        }
+        stage("deploy") {
+            steps {
+                echo "some build compilations here..."
+            }
+        }
+        stage("test") {
+            steps {
+                echo "some test execution here..."
+                echo "1"
+            }
+        }
+    }
+}
