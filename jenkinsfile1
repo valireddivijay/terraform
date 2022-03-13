@@ -12,10 +12,15 @@ pipeline {
                 echo "some build compilations here..."
             }
         }
+        stage("pord") {
+            steps {
+                echo "some build compilations here..."
+            }
+        }
         stage("test") {
             steps {
                 echo "some test execution here..."
-                echo 1
+                echo "1
             }
         }
     }
