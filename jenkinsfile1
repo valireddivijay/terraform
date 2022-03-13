@@ -20,7 +20,7 @@ pipeline {
         stage("test") {
             steps {
                 echo "some test execution here..."
-                echo "1
+                echo "1"
             }
         }
     }
