@@ -7,7 +7,7 @@ pipeline {
                 echo "some code compilation here..."
             }
         }
-        stage("deploy") {
+        stage("dev") {
             steps {
                 echo "some build compilations here..."
             }
@@ -15,7 +15,7 @@ pipeline {
         stage("test") {
             steps {
                 echo "some test execution here..."
-                echo "1"
+                echo 1
             }
         }
     }
